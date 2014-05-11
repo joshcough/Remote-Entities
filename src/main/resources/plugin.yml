@@ -1,9 +1,4 @@
-main: ${project.groupId}.${project.artifactId}.${project.name}
+main: de.kumpelblase2.remoteentities.RemoteEntities
 author: kumpelblase2
-name: ${project.name}
-version: ${project.version}
-commands:
-    remoteentities:
-        description: Commands for remote entities
-        usage: /<command> <action>
-        aliases: [re]
+name: RemoteEntities
+version: 1.7.2-R0.2-SNAPSHOT
