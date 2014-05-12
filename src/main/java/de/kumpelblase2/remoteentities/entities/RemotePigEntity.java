@@ -7,9 +7,6 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.util.Vector;
 import de.kumpelblase2.remoteentities.api.*;
 import de.kumpelblase2.remoteentities.api.features.InventoryFeature;
-import de.kumpelblase2.remoteentities.api.thinking.DesireItem;
-import de.kumpelblase2.remoteentities.api.thinking.RideBehavior;
-import de.kumpelblase2.remoteentities.api.thinking.goals.*;
 import de.kumpelblase2.remoteentities.nms.PathfinderGoalSelectorHelper;
 import de.kumpelblase2.remoteentities.utilities.ReflectionUtil;
 
@@ -30,14 +27,14 @@ public class RemotePigEntity extends EntityPig implements RemoteEntityHandle
 		this.m_remoteEntity = inRemoteEntity;
 		new PathfinderGoalSelectorHelper(this.goalSelector).clearGoals();
 		new PathfinderGoalSelectorHelper(this.targetSelector).clearGoals();
-		try
-		{
-			Field temptField = ReflectionUtil.getOrRegisterField(EntityPig.class, "bp");
-			temptField.set(this, new DesireFollowCarrotStickTemp(this.getRemoteEntity()));
-		}
-		catch(Exception e)
-		{
-		}
+//		try
+//		{
+//			Field temptField = ReflectionUtil.getOrRegisterField(EntityPig.class, "bp");
+//			temptField.set(this, new DesireFollowCarrotStickTemp(this.getRemoteEntity()));
+//		}
+//		catch(Exception e)
+//		{
+//		}
 	}
 
 	@Override
@@ -53,20 +50,6 @@ public class RemotePigEntity extends EntityPig implements RemoteEntityHandle
 	public RemoteEntity getRemoteEntity()
 	{
 		return this.m_remoteEntity;
-	}
-
-	@Override
-	public void setupStandardGoals()
-	{
-		this.getRemoteEntity().getMind().addMovementDesires(getDefaultMovementDesires());
-	}
-
-	@Override
-	public void h()
-	{
-		super.h();
-		if(this.getRemoteEntity() != null)
-			this.getRemoteEntity().getMind().tick();
 	}
 
 	@Override
@@ -96,9 +79,6 @@ public class RemotePigEntity extends EntityPig implements RemoteEntityHandle
 	public void e(float inXMotion, float inZMotion)
 	{
 		float[] motion = new float[] { inXMotion, inZMotion, (float)this.motY };
-		if(this.m_remoteEntity.getMind().hasBehavior(RideBehavior.class))
-			this.m_remoteEntity.getMind().getBehavior(RideBehavior.class).ride(motion);
-
 		this.motY = (double)motion[2];
 		super.e(motion[0], motion[1]);
 	}
@@ -157,34 +137,5 @@ public class RemotePigEntity extends EntityPig implements RemoteEntityHandle
 	protected void a(int i, int j, int k, Block l)
 	{
 		this.makeSound(this.m_remoteEntity.getSound(EntitySound.STEP), 0.15F, 1.0F);
-	}
-
-	public static DesireItem[] getDefaultMovementDesires()
-	{
-		try
-		{
-			return new DesireItem[] {
-					new DesireItem(new DesireSwim(), 0),
-					new DesireItem(new DesirePanic(1.25D), 1),
-					new DesireItem(new DesireFollowCarrotStick(0.3f), 2),
-					new DesireItem(new DesireBreed(), 3),
-					new DesireItem(new DesireTempt(Item.b(Items.CARROT), false, 1.2D), 4),
-					new DesireItem(new DesireTempt(Item.b(Items.CARROT_STICK), false, 1.2D), 4),
-					new DesireItem(new DesireFollowParent(), 5),
-					new DesireItem(new DesireWanderAround(), 6),
-					new DesireItem(new DesireLookAtNearest(EntityHuman.class, 6), 7),
-					new DesireItem(new DesireLookRandomly(), 8)
-			};
-		}
-		catch(Exception e)
-		{
-			e.printStackTrace();
-			return new DesireItem[0];
-		}
-	}
-
-	public static DesireItem[] getDefaultTargetingDesires()
-	{
-		return new DesireItem[0];
 	}
 }

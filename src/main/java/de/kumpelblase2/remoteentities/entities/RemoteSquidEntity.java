@@ -6,8 +6,6 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.util.Vector;
 import de.kumpelblase2.remoteentities.api.*;
 import de.kumpelblase2.remoteentities.api.features.InventoryFeature;
-import de.kumpelblase2.remoteentities.api.thinking.DesireItem;
-import de.kumpelblase2.remoteentities.api.thinking.RideBehavior;
 import de.kumpelblase2.remoteentities.nms.PathfinderGoalSelectorHelper;
 
 public class RemoteSquidEntity extends EntitySquid implements RemoteEntityHandle
@@ -45,19 +43,6 @@ public class RemoteSquidEntity extends EntitySquid implements RemoteEntityHandle
 	}
 
 	@Override
-	public void setupStandardGoals()
-	{
-	}
-
-	@Override
-	public void h()
-	{
-		super.h();
-		if(this.getRemoteEntity() != null)
-			this.getRemoteEntity().getMind().tick();
-	}
-
-	@Override
 	public void g(double x, double y, double z)
 	{
 		if(this.m_remoteEntity == null)
@@ -84,9 +69,6 @@ public class RemoteSquidEntity extends EntitySquid implements RemoteEntityHandle
 	public void e(float inXMotion, float inZMotion)
 	{
 		float[] motion = new float[] { inXMotion, inZMotion, (float)this.motY };
-		if(this.m_remoteEntity.getMind().hasBehavior(RideBehavior.class))
-			this.m_remoteEntity.getMind().getBehavior(RideBehavior.class).ride(motion);
-
 		this.motY = (double)motion[2];
 		super.e(motion[0], motion[1]);
 	}
@@ -145,15 +127,5 @@ public class RemoteSquidEntity extends EntitySquid implements RemoteEntityHandle
 	protected String aU()
 	{
 		return this.m_remoteEntity.getSound(EntitySound.DEATH);
-	}
-
-	public static DesireItem[] getDefaultMovementDesires()
-	{
-		return new DesireItem[0];
-	}
-
-	public static DesireItem[] getDefaultTargetingDesires()
-	{
-		return new DesireItem[0];
 	}
 }

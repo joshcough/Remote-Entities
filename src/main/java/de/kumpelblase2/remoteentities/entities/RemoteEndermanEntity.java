@@ -6,8 +6,6 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.util.Vector;
 import de.kumpelblase2.remoteentities.api.*;
 import de.kumpelblase2.remoteentities.api.features.InventoryFeature;
-import de.kumpelblase2.remoteentities.api.thinking.DesireItem;
-import de.kumpelblase2.remoteentities.api.thinking.RideBehavior;
 import de.kumpelblase2.remoteentities.nms.PathfinderGoalSelectorHelper;
 
 public class RemoteEndermanEntity extends EntityEnderman implements RemoteEntityHandle
@@ -45,19 +43,6 @@ public class RemoteEndermanEntity extends EntityEnderman implements RemoteEntity
 	}
 
 	@Override
-	public void setupStandardGoals()
-	{
-	}
-
-	@Override
-	public void h()
-	{
-		super.h();
-		if(this.getRemoteEntity() != null)
-			this.getRemoteEntity().getMind().tick();
-	}
-
-	@Override
 	public void g(double x, double y, double z)
 	{
 		if(this.m_remoteEntity == null)
@@ -84,9 +69,6 @@ public class RemoteEndermanEntity extends EntityEnderman implements RemoteEntity
 	public void e(float inXMotion, float inZMotion)
 	{
 		float[] motion = new float[] { inXMotion, inZMotion, (float)this.motY };
-		if(this.m_remoteEntity.getMind().hasBehavior(RideBehavior.class))
-			this.m_remoteEntity.getMind().getBehavior(RideBehavior.class).ride(motion);
-
 		this.motY = (double)motion[2];
 		super.e(motion[0], motion[1]);
 	}
@@ -206,15 +188,5 @@ public class RemoteEndermanEntity extends EntityEnderman implements RemoteEntity
 			this.makeSound(this.m_remoteEntity.getSound(EntitySound.TELEPORT), 1.0F, 1.0F);
 			return true;
 		}
-	}
-
-	public static DesireItem[] getDefaultMovementDesires()
-	{
-		return new DesireItem[0];
-	}
-
-	public static DesireItem[] getDefaultTargetingDesires()
-	{
-		return new DesireItem[0];
 	}
 }

@@ -7,8 +7,6 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.util.Vector;
 import de.kumpelblase2.remoteentities.api.*;
 import de.kumpelblase2.remoteentities.api.features.InventoryFeature;
-import de.kumpelblase2.remoteentities.api.thinking.*;
-import de.kumpelblase2.remoteentities.api.thinking.goals.*;
 import de.kumpelblase2.remoteentities.nms.PathfinderGoalSelectorHelper;
 import de.kumpelblase2.remoteentities.utilities.ReflectionUtil;
 
@@ -29,15 +27,15 @@ public class RemoteOceloteEntity extends EntityOcelot implements RemoteEntityHan
 		this.m_remoteEntity = inRemoteEntity;
 		new PathfinderGoalSelectorHelper(this.goalSelector).clearGoals();
 		new PathfinderGoalSelectorHelper(this.targetSelector).clearGoals();
-		this.bp = new DesireSitTemp(this.getRemoteEntity());
-		try
-		{
-			Field temptField = ReflectionUtil.getOrRegisterField(EntityOcelot.class, "bq");
-			temptField.set(this, new DesireTemptTemp(this.getRemoteEntity()));
-		}
-		catch(Exception e)
-		{
-		}
+//		this.bp = new DesireSitTemp(this.getRemoteEntity());
+//		try
+//		{
+//			Field temptField = ReflectionUtil.getOrRegisterField(EntityOcelot.class, "bq");
+//			temptField.set(this, new DesireTemptTemp(this.getRemoteEntity()));
+//		}
+//		catch(Exception e)
+//		{
+//		}
 	}
 
 	@Override
@@ -53,22 +51,6 @@ public class RemoteOceloteEntity extends EntityOcelot implements RemoteEntityHan
 	public RemoteEntity getRemoteEntity()
 	{
 		return this.m_remoteEntity;
-	}
-
-	@Override
-	public void setupStandardGoals()
-	{
-		Mind mind = this.getRemoteEntity().getMind();
-		mind.addMovementDesires(getDefaultMovementDesires());
-		mind.addTargetingDesires(getDefaultTargetingDesires());
-	}
-
-	@Override
-	public void h()
-	{
-		super.h();
-		if(this.getRemoteEntity() != null)
-			this.getRemoteEntity().getMind().tick();
 	}
 
 	@Override
@@ -98,9 +80,6 @@ public class RemoteOceloteEntity extends EntityOcelot implements RemoteEntityHan
 	public void e(float inXMotion, float inZMotion)
 	{
 		float[] motion = new float[] { inXMotion, inZMotion, (float)this.motY };
-		if(this.m_remoteEntity.getMind().hasBehavior(RideBehavior.class))
-			this.m_remoteEntity.getMind().getBehavior(RideBehavior.class).ride(motion);
-
 		this.motY = (double)motion[2];
 		super.e(motion[0], motion[1]);
 	}
@@ -167,45 +146,5 @@ public class RemoteOceloteEntity extends EntityOcelot implements RemoteEntityHan
 	protected String aU()
 	{
 		return this.m_remoteEntity.getSound(EntitySound.DEATH);
-	}
-
-	public static DesireItem[] getDefaultMovementDesires()
-	{
-		try
-		{
-			return new DesireItem[] {
-					new DesireItem(new DesireSwim(), 1),
-					new DesireItem(new DesireSit(), 2),
-					new DesireItem(new DesireTempt(Item.b(Items.RAW_FISH), true, 0.6D), 3),
-					new DesireItem(new DesireAvoidSpecific(16F, 1.33D, 0.8D, EntityHuman.class), 4),
-					new DesireItem(new DesireFollowTamer(5, 10), 5),
-					new DesireItem(new DesireSitOnBlock(), 6),
-					new DesireItem(new DesireLeapAtTarget(0.3F), 7),
-					new DesireItem(new DesireOcelotAttack(), 8),
-					new DesireItem(new DesireBreed(), 9),
-					new DesireItem(new DesireWanderAround(), 10),
-					new DesireItem(new DesireLookAtNearest(EntityHuman.class, 10F), 11)
-			};
-		}
-		catch(Exception e)
-		{
-			e.printStackTrace();
-			return new DesireItem[0];
-		}
-	}
-
-	public static DesireItem[] getDefaultTargetingDesires()
-	{
-		try
-		{
-			return new DesireItem[] {
-					new DesireItem(new DesireNonTamedFindNearest(EntityChicken.class, 14, false, true, 750), 1)
-			};
-		}
-		catch(Exception e)
-		{
-			e.printStackTrace();
-			return new DesireItem[0];
-		}
 	}
 }

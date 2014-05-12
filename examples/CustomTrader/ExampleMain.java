@@ -12,7 +12,6 @@ import de.kumpelblase2.remoteentities.api.RemoteEntity;
 import de.kumpelblase2.remoteentities.api.RemoteEntityType;
 import de.kumpelblase2.remoteentities.api.features.RemoteTamingFeature;
 import de.kumpelblase2.remoteentities.api.features.TamingFeature;
-import de.kumpelblase2.remoteentities.api.thinking.goals.DesireFollowTamer;
 
 public class ExampleMain extends JavaPlugin implements Listener
 {

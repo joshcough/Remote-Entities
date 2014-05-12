@@ -117,8 +117,6 @@ class ChunkEntityLoader implements Listener
 	protected void spawn(EntityLoadData inData)
 	{
 		inData.entity.spawn(inData.loc);
-		if(inData.entity.isSpawned() && inData.setupGoals)
-			((RemoteEntityHandle)inData.entity.getHandle()).setupStandardGoals();
 	}
 
 	class EntityLoadData

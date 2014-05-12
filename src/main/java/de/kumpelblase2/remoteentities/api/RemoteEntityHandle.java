@@ -11,8 +11,4 @@ public interface RemoteEntityHandle extends InventoryHolder
 	 */
 	public RemoteEntity getRemoteEntity();
 
-	/**
-	 * Sets up the default goals/desires for this entity
-	 */
-	public void setupStandardGoals();
 }

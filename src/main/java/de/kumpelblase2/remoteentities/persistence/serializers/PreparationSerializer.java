@@ -3,7 +3,6 @@ package de.kumpelblase2.remoteentities.persistence.serializers;
 import org.bukkit.plugin.Plugin;
 import de.kumpelblase2.remoteentities.*;
 import de.kumpelblase2.remoteentities.api.RemoteEntity;
-import de.kumpelblase2.remoteentities.api.thinking.DesireItem;
 import de.kumpelblase2.remoteentities.persistence.*;
 
 /**
@@ -35,23 +34,6 @@ public abstract class PreparationSerializer implements IEntitySerializer
 			context.atLocation(inData.location.toBukkitLocation());
 
 		RemoteEntity entity = context.create();
-		for(DesireData data : inData.movementDesires)
-		{
-			DesireItem item = data.create(entity);
-			entity.getMind().addMovementDesire(item.getDesire(), item.getPriority());
-		}
-
-		for(DesireData data : inData.actionDesires)
-		{
-			DesireItem item = data.create(entity);
-			entity.getMind().addTargetingDesire(item.getDesire(), item.getPriority());
-		}
-
-		for(BehaviorData data : inData.behaviors)
-		{
-			entity.getMind().addBehaviour(data.create(entity));
-		}
-		
 		for(FeatureData data : inData.features)
 		{
 			entity.getFeatures().addFeature(data.create(entity));

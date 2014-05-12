@@ -6,8 +6,6 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.util.Vector;
 import de.kumpelblase2.remoteentities.api.*;
 import de.kumpelblase2.remoteentities.api.features.InventoryFeature;
-import de.kumpelblase2.remoteentities.api.thinking.*;
-import de.kumpelblase2.remoteentities.api.thinking.goals.*;
 import de.kumpelblase2.remoteentities.nms.PathfinderGoalSelectorHelper;
 
 public class RemoteCreeperEntity extends EntityCreeper implements RemoteEntityHandle
@@ -45,25 +43,9 @@ public class RemoteCreeperEntity extends EntityCreeper implements RemoteEntityHa
 	}
 
 	@Override
-	public void setupStandardGoals()
-	{
-		Mind mind = this.getRemoteEntity().getMind();
-		mind.addMovementDesires(getDefaultMovementDesires());
-		mind.addTargetingDesires(getDefaultTargetingDesires());
-	}
-
-	@Override
 	public boolean bk()
 	{
 		return true;
-	}
-
-	@Override
-	public void h()
-	{
-		super.h();
-		if(this.getRemoteEntity() != null)
-			this.getRemoteEntity().getMind().tick();
 	}
 
 	@Override
@@ -93,9 +75,6 @@ public class RemoteCreeperEntity extends EntityCreeper implements RemoteEntityHa
 	public void e(float inXMotion, float inZMotion)
 	{
 		float[] motion = new float[] { inXMotion, inZMotion, (float)this.motY };
-		if(this.m_remoteEntity.getMind().hasBehavior(RideBehavior.class))
-			this.m_remoteEntity.getMind().getBehavior(RideBehavior.class).ride(motion);
-
 		this.motY = (double)motion[2];
 		super.e(motion[0], motion[1]);
 	}
@@ -154,26 +133,5 @@ public class RemoteCreeperEntity extends EntityCreeper implements RemoteEntityHa
 	protected String aU()
 	{
 		return this.m_remoteEntity.getSound(EntitySound.DEATH);
-	}
-
-	public static DesireItem[] getDefaultMovementDesires()
-	{
-		return new DesireItem[] {
-				new DesireItem(new DesireSwim(), 1),
-				new DesireItem(new DesireSwell(), 2),
-				new DesireItem(new DesireAvoidSpecific(6f, 0.25f, 0.3f, EntityOcelot.class), 3),
-				new DesireItem(new DesireMoveAndMeleeAttack(null, false), 4),
-				new DesireItem(new DesireWanderAround(), 5),
-				new DesireItem(new DesireLookAtNearest(EntityHuman.class, 8), 6),
-				new DesireItem(new DesireLookRandomly(), 6)
-		};
-	}
-
-	public static DesireItem[] getDefaultTargetingDesires()
-	{
-		return new DesireItem[] {
-				new DesireItem(new DesireFindNearestTarget(EntityHuman.class, 16, true, 0), 1),
-				new DesireItem(new DesireFindAttackingTarget(16, false, false), 2)
-		};
 	}
 }

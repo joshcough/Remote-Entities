@@ -6,7 +6,6 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.util.Vector;
 import de.kumpelblase2.remoteentities.api.*;
 import de.kumpelblase2.remoteentities.api.features.InventoryFeature;
-import de.kumpelblase2.remoteentities.api.thinking.*;
 import de.kumpelblase2.remoteentities.nms.PathfinderGoalSelectorHelper;
 
 public class RemotePigmenEntity extends EntityPigZombie implements RemoteEntityHandle
@@ -44,22 +43,6 @@ public class RemotePigmenEntity extends EntityPigZombie implements RemoteEntityH
 	}
 
 	@Override
-	public void setupStandardGoals()
-	{
-		Mind mind = this.getRemoteEntity().getMind();
-		mind.addMovementDesires(getDefaultMovementDesires());
-		mind.addTargetingDesires(getDefaultTargetingDesires());
-	}
-
-	@Override
-	public void h()
-	{
-		super.h();
-		if(this.getRemoteEntity() != null)
-			this.getRemoteEntity().getMind().tick();
-	}
-
-	@Override
 	public void g(double x, double y, double z)
 	{
 		if(this.m_remoteEntity == null)
@@ -86,9 +69,6 @@ public class RemotePigmenEntity extends EntityPigZombie implements RemoteEntityH
 	public void e(float inXMotion, float inZMotion)
 	{
 		float[] motion = new float[] { inXMotion, inZMotion, (float)this.motY };
-		if(this.m_remoteEntity.getMind().hasBehavior(RideBehavior.class))
-			this.m_remoteEntity.getMind().getBehavior(RideBehavior.class).ride(motion);
-
 		this.motY = (double)motion[2];
 		super.e(motion[0], motion[1]);
 	}
@@ -147,15 +127,5 @@ public class RemotePigmenEntity extends EntityPigZombie implements RemoteEntityH
 	protected String aU()
 	{
 		return this.m_remoteEntity.getSound(EntitySound.DEATH);
-	}
-
-	public static DesireItem[] getDefaultMovementDesires()
-	{
-		return RemoteZombieEntity.getDefaultMovementDesires();
-	}
-
-	public static DesireItem[] getDefaultTargetingDesires()
-	{
-		return RemoteZombieEntity.getDefaultTargetingDesires();
 	}
 }

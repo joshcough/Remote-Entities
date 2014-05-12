@@ -8,7 +8,6 @@ import java.util.*;
 import net.minecraft.util.io.netty.channel.Channel;
 import org.bukkit.Bukkit;
 import de.kumpelblase2.remoteentities.RemoteEntities;
-import de.kumpelblase2.remoteentities.api.thinking.Desire;
 import de.kumpelblase2.remoteentities.persistence.ParameterData;
 import de.kumpelblase2.remoteentities.persistence.SerializeAs;
 
@@ -118,7 +117,7 @@ public final class ReflectionUtil
 		Class<?> clazz = inClass.getClass();
 		List<ParameterData> parameters = new ArrayList<ParameterData>();
 		Set<String> membersLooked = new HashSet<String>();
-		while(clazz != Object.class && clazz != Desire.class)
+		while(clazz != Object.class)
 		{
 			for(Field field : clazz.getDeclaredFields())
 			{

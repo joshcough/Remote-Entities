@@ -7,8 +7,6 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.util.Vector;
 import de.kumpelblase2.remoteentities.api.*;
 import de.kumpelblase2.remoteentities.api.features.InventoryFeature;
-import de.kumpelblase2.remoteentities.api.thinking.*;
-import de.kumpelblase2.remoteentities.api.thinking.goals.*;
 import de.kumpelblase2.remoteentities.nms.PathfinderGoalSelectorHelper;
 
 public class RemoteWolfEntity extends EntityWolf implements RemoteEntityHandle
@@ -28,7 +26,6 @@ public class RemoteWolfEntity extends EntityWolf implements RemoteEntityHandle
 		this.m_remoteEntity = inRemoteEntity;
 		new PathfinderGoalSelectorHelper(this.goalSelector).clearGoals();
 		new PathfinderGoalSelectorHelper(this.targetSelector).clearGoals();
-		this.bp = new DesireSitTemp(this.getRemoteEntity());
 	}
 
 	@Override
@@ -44,22 +41,6 @@ public class RemoteWolfEntity extends EntityWolf implements RemoteEntityHandle
 	public RemoteEntity getRemoteEntity()
 	{
 		return this.m_remoteEntity;
-	}
-
-	@Override
-	public void setupStandardGoals()
-	{
-		Mind mind = this.getRemoteEntity().getMind();
-		mind.addMovementDesires(getDefaultMovementDesires());
-		mind.addTargetingDesires(getDefaultTargetingDesires());
-	}
-
-	@Override
-	public void h()
-	{
-		super.h();
-		if(this.getRemoteEntity() != null)
-			this.getRemoteEntity().getMind().tick();
 	}
 
 	@Override
@@ -89,9 +70,6 @@ public class RemoteWolfEntity extends EntityWolf implements RemoteEntityHandle
 	public void e(float inXMotion, float inZMotion)
 	{
 		float[] motion = new float[] { inXMotion, inZMotion, (float)this.motY };
-		if(this.m_remoteEntity.getMind().hasBehavior(RideBehavior.class))
-			this.m_remoteEntity.getMind().getBehavior(RideBehavior.class).ride(motion);
-
 		this.motY = (double)motion[2];
 		super.e(motion[0], motion[1]);
 	}
@@ -168,47 +146,5 @@ public class RemoteWolfEntity extends EntityWolf implements RemoteEntityHandle
 	@Override
 	protected void a(int i, int j, int k, Block l) {
 		this.makeSound(this.m_remoteEntity.getSound(EntitySound.STEP), 0.15F, 1.0F);
-	}
-
-	public static DesireItem[] getDefaultMovementDesires()
-	{
-		try
-		{
-			return new DesireItem[] {
-					new DesireItem(new DesireSwim(), 1),
-					new DesireItem(new DesireSit(), 2),
-					new DesireItem(new DesireLeapAtTarget(0.4F), 3),
-					new DesireItem(new DesireMoveAndMeleeAttack(null, true), 4),
-					new DesireItem(new DesireFollowTamer(2, 10), 5),
-					new DesireItem(new DesireBreed(), 6),
-					new DesireItem(new DesireWanderAround(), 7),
-					new DesireItem(new DesireBegForItem(8f, Material.BONE), 8),
-					new DesireItem(new DesireLookAtNearest(EntityHuman.class, 8), 9),
-					new DesireItem(new DesireLookRandomly(), 9)
-			};
-		}
-		catch(Exception e)
-		{
-			e.printStackTrace();
-			return new DesireItem[0];
-		}
-	}
-
-	public static DesireItem[] getDefaultTargetingDesires()
-	{
-		try
-		{
-			return new DesireItem[] {
-					new DesireItem(new DesireProtectOwner(32, false), 1),
-					new DesireItem(new DesireHelpAttacking(32, false), 2),
-					new DesireItem(new DesireFindAttackingTarget(16, true, true), 3),
-					new DesireItem(new DesireNonTamedFindNearest(EntitySheep.class, 14, false, true, 200), 4)
-			};
-		}
-		catch(Exception e)
-		{
-			e.printStackTrace();
-			return new DesireItem[0];
-		}
 	}
 }

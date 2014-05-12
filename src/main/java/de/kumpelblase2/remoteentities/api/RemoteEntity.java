@@ -7,7 +7,6 @@ import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
 import de.kumpelblase2.remoteentities.EntityManager;
 import de.kumpelblase2.remoteentities.api.features.FeatureSet;
-import de.kumpelblase2.remoteentities.api.thinking.Mind;
 
 public interface RemoteEntity extends Nameable
 {
@@ -24,13 +23,6 @@ public interface RemoteEntity extends Nameable
 	 * @return	type
 	 */
 	public RemoteEntityType getType();
-
-	/**
-	 * Gets the mind of the entity
-	 *
-	 * @return	mind
-	 */
-	public Mind getMind();
 
 	/**
 	 * Gets the bukkit entity of this RemoteEntity

@@ -7,8 +7,6 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.util.Vector;
 import de.kumpelblase2.remoteentities.api.*;
 import de.kumpelblase2.remoteentities.api.features.InventoryFeature;
-import de.kumpelblase2.remoteentities.api.thinking.DesireItem;
-import de.kumpelblase2.remoteentities.api.thinking.RideBehavior;
 import de.kumpelblase2.remoteentities.nms.PathfinderGoalSelectorHelper;
 
 public class RemoteEnderDragonEntity extends EntityEnderDragon implements RemoteEntityHandle
@@ -47,17 +45,9 @@ public class RemoteEnderDragonEntity extends EntityEnderDragon implements Remote
 	}
 
 	@Override
-	public void setupStandardGoals()
-	{
-	}
-
-	@Override
 	public void h()
 	{
 		super.h();
-		if(this.getRemoteEntity() != null)
-			this.getRemoteEntity().getMind().tick();
-
 		if(this.m_targetLocation != null)
 		{
 			this.h = this.m_targetLocation.getX();
@@ -80,15 +70,6 @@ public class RemoteEnderDragonEntity extends EntityEnderDragon implements Remote
 	            this.world.addParticle("largeexplode", this.locX + (double) f, this.locY + 2.0D + (double) d05, this.locZ + (double) f1, 0.0D, 0.0D, 0.0D);
 			}
 			// ---
-			return;
-		}
-		else if(this.getRemoteEntity().getMind().hasBehavior(RideBehavior.class))
-		{
-			float[] mot = new float[] { 0, 0, 0 };
-			this.getRemoteEntity().getMind().getBehavior(RideBehavior.class).ride(mot);
-			super.e(mot[0], mot[1]);
-			this.motY = mot[2];
-			this.m_remoteEntity.setYaw((this.yaw < 0 ? this.yaw + 180 : this.yaw - 180));
 			return;
 		}
 
@@ -181,9 +162,6 @@ public class RemoteEnderDragonEntity extends EntityEnderDragon implements Remote
 	public void e(float inXMotion, float inZMotion)
 	{
 		float[] motion = new float[] { inXMotion, inZMotion, (float)this.motY };
-		if(this.m_remoteEntity.getMind().hasBehavior(RideBehavior.class))
-			this.m_remoteEntity.getMind().getBehavior(RideBehavior.class).ride(motion);
-
 		this.motY = (double)motion[2];
 		super.e(motion[0], motion[1]);
 	}
@@ -234,15 +212,5 @@ public class RemoteEnderDragonEntity extends EntityEnderDragon implements Remote
 	protected void setTargetLocation(Location inTarget)
 	{
 		this.m_targetLocation = inTarget;
-	}
-
-	public static DesireItem[] getDefaultMovementDesires(RemoteEntity inEntityFor)
-	{
-		return new DesireItem[0];
-	}
-
-	public static DesireItem[] getDefaultTargetingDesires(RemoteEntity inEntityFor)
-	{
-		return new DesireItem[0];
 	}
 }

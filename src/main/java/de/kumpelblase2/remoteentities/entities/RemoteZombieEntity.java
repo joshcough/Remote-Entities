@@ -6,8 +6,6 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.util.Vector;
 import de.kumpelblase2.remoteentities.api.*;
 import de.kumpelblase2.remoteentities.api.features.InventoryFeature;
-import de.kumpelblase2.remoteentities.api.thinking.*;
-import de.kumpelblase2.remoteentities.api.thinking.goals.*;
 import de.kumpelblase2.remoteentities.nms.PathfinderGoalSelectorHelper;
 
 public class RemoteZombieEntity extends EntityZombie implements RemoteEntityHandle
@@ -45,22 +43,6 @@ public class RemoteZombieEntity extends EntityZombie implements RemoteEntityHand
 	}
 
 	@Override
-	public void setupStandardGoals()
-	{
-		Mind mind = this.getRemoteEntity().getMind();
-		mind.addMovementDesires(getDefaultMovementDesires());
-		mind.addTargetingDesires(getDefaultTargetingDesires());
-	}
-
-	@Override
-	public void h()
-	{
-		super.h();
-		if(this.getRemoteEntity() != null)
-			this.getRemoteEntity().getMind().tick();
-	}
-
-	@Override
 	public void g(double x, double y, double z)
 	{
 		if(this.m_remoteEntity == null)
@@ -87,9 +69,6 @@ public class RemoteZombieEntity extends EntityZombie implements RemoteEntityHand
 	public void e(float inXMotion, float inZMotion)
 	{
 		float[] motion = new float[] { inXMotion, inZMotion, (float)this.motY };
-		if(this.m_remoteEntity.getMind().hasBehavior(RideBehavior.class))
-			this.m_remoteEntity.getMind().getBehavior(RideBehavior.class).ride(motion);
-
 		this.motY = (double)motion[2];
 		super.e(motion[0], motion[1]);
 	}
@@ -153,29 +132,5 @@ public class RemoteZombieEntity extends EntityZombie implements RemoteEntityHand
 	@Override
 	protected void a(int i, int j, int k, Block l) {
 		this.makeSound(this.m_remoteEntity.getSound(EntitySound.STEP), 0.15F, 1.0F);
-	}
-
-	public static DesireItem[] getDefaultMovementDesires()
-	{
-		return new DesireItem[] {
-				new DesireItem(new DesireSwim(), 0),
-				new DesireItem(new DesireDestroyDoor(false), 1),
-				new DesireItem(new DesireMoveAndMeleeAttack(EntityHuman.class, false), 2),
-				new DesireItem(new DesireMoveAndMeleeAttack(EntityVillager.class, true), 3),
-				new DesireItem(new DesireMoveTowardsRestriction(), 4),
-				new DesireItem(new DesireMoveThroughVillage(false), 5),
-				new DesireItem(new DesireWanderAround(), 6),
-				new DesireItem(new DesireLookAtNearest(EntityHuman.class, 8), 7),
-				new DesireItem(new DesireLookRandomly(), 7)
-		};
-	}
-
-	public static DesireItem[] getDefaultTargetingDesires()
-	{
-		return new DesireItem[] {
-				new DesireItem(new DesireFindAttackingTarget(16, false, false), 1),
-				new DesireItem(new DesireFindNearestTarget(EntityHuman.class, 16, false, true, 0), 2),
-				new DesireItem(new DesireFindNearestTarget(EntityVillager.class, 16, false, true, 0), 2)
-		};
 	}
 }

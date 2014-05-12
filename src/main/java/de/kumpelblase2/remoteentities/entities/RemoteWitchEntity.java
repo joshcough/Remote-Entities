@@ -6,8 +6,6 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.util.Vector;
 import de.kumpelblase2.remoteentities.api.*;
 import de.kumpelblase2.remoteentities.api.features.InventoryFeature;
-import de.kumpelblase2.remoteentities.api.thinking.*;
-import de.kumpelblase2.remoteentities.api.thinking.goals.*;
 import de.kumpelblase2.remoteentities.nms.PathfinderGoalSelectorHelper;
 
 public class RemoteWitchEntity extends EntityWitch implements RemoteEntityHandle
@@ -45,25 +43,9 @@ public class RemoteWitchEntity extends EntityWitch implements RemoteEntityHandle
 	}
 
 	@Override
-	public void setupStandardGoals()
-	{
-		Mind mind = this.m_remoteEntity.getMind();
-		mind.addMovementDesires(getDefaultMovementDesires());
-		mind.addTargetingDesires(getDefaultTargetingDesires());
-	}
-
-	@Override
 	public boolean bk()
 	{
 		return true;
-	}
-
-	@Override
-	public void h()
-	{
-		super.h();
-		if(this.getRemoteEntity() != null)
-			this.getRemoteEntity().getMind().tick();
 	}
 
 	@Override
@@ -93,9 +75,6 @@ public class RemoteWitchEntity extends EntityWitch implements RemoteEntityHandle
 	public void e(float inXMotion, float inZMotion)
 	{
 		float[] motion = new float[] { inXMotion, inZMotion, (float)this.motY };
-		if(this.m_remoteEntity.getMind().hasBehavior(RideBehavior.class))
-			this.m_remoteEntity.getMind().getBehavior(RideBehavior.class).ride(motion);
-
 		this.motY = (double)motion[2];
 		super.e(motion[0], motion[1]);
 	}
@@ -154,24 +133,5 @@ public class RemoteWitchEntity extends EntityWitch implements RemoteEntityHandle
 	protected String aU()
 	{
 		return this.m_remoteEntity.getSound(EntitySound.DEATH);
-	}
-
-	public static DesireItem[] getDefaultMovementDesires()
-	{
-		return new DesireItem[] {
-				new DesireItem(new DesireSwim(), 1),
-				new DesireItem(new DesireRangedAttack(RemoteProjectileType.ENTITY_DEFAULT, 60, 10), 2),
-				new DesireItem(new DesireWanderAround(), 3),
-				new DesireItem(new DesireLookAtNearest(EntityHuman.class, 8), 4),
-				new DesireItem(new DesireLookRandomly(), 5)
-		};
-	}
-
-	public static DesireItem[] getDefaultTargetingDesires()
-	{
-		return new DesireItem[] {
-				new DesireItem(new DesireFindAttackingTarget(16, false, false), 1),
-				new DesireItem(new DesireFindNearestTarget(EntityHuman.class, 16, false, true, 0), 2)
-		};
 	}
 }

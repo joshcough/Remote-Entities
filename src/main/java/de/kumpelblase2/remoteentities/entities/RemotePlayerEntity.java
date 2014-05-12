@@ -7,9 +7,6 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.util.Vector;
 import de.kumpelblase2.remoteentities.api.RemoteEntity;
 import de.kumpelblase2.remoteentities.api.RemoteEntityHandle;
-import de.kumpelblase2.remoteentities.api.thinking.DesireItem;
-import de.kumpelblase2.remoteentities.api.thinking.RideBehavior;
-import de.kumpelblase2.remoteentities.api.thinking.goals.DesireSwim;
 import de.kumpelblase2.remoteentities.nms.*;
 import de.kumpelblase2.remoteentities.utilities.WorldUtilities;
 
@@ -84,9 +81,6 @@ public class RemotePlayerEntity extends EntityPlayer implements RemoteEntityHand
 		this.updateControllers();
 		this.applyMovement();
         //End Citizens
-
-        if(this.getRemoteEntity() != null)
-        	this.getRemoteEntity().getMind().tick();
 	}
 
 	private void updateControllers()
@@ -128,12 +122,6 @@ public class RemotePlayerEntity extends EntityPlayer implements RemoteEntityHand
 	}
 
 	@Override
-	public void setupStandardGoals()
-	{
-		this.getRemoteEntity().getMind().addMovementDesires(getDefaultMovementDesires());
-	}
-
-	@Override
 	public void g(double x, double y, double z)
 	{
 		if(this.m_remoteEntity == null)
@@ -160,9 +148,6 @@ public class RemotePlayerEntity extends EntityPlayer implements RemoteEntityHand
 	public void e(float inXMotion, float inZMotion)
 	{
 		float[] motion = new float[] { inXMotion, inZMotion, (float)this.motY };
-		if(this.m_remoteEntity.getMind().hasBehavior(RideBehavior.class))
-			this.m_remoteEntity.getMind().getBehavior(RideBehavior.class).ride(motion);
-
 		this.motY = (double)motion[2];
 		super.e(motion[0], motion[1]);
 	}
@@ -223,18 +208,6 @@ public class RemotePlayerEntity extends EntityPlayer implements RemoteEntityHand
 		{
 			WorldUtilities.sendPacketToPlayer(player, packet);
 		}
-	}
-
-	public static DesireItem[] getDefaultMovementDesires()
-	{
-		return new DesireItem[] {
-				new DesireItem(new DesireSwim(), 0)
-		};
-	}
-
-	public static DesireItem[] getDefaultTargetingDesires()
-	{
-		return new DesireItem[0];
 	}
 
 	public Navigation getNavigation()

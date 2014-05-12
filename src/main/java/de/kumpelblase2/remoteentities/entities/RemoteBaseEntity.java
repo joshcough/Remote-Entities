@@ -21,7 +21,6 @@ import de.kumpelblase2.remoteentities.EntityManager;
 import de.kumpelblase2.remoteentities.api.*;
 import de.kumpelblase2.remoteentities.api.events.*;
 import de.kumpelblase2.remoteentities.api.features.*;
-import de.kumpelblase2.remoteentities.api.thinking.*;
 import de.kumpelblase2.remoteentities.nms.RemoteSpeedModifier;
 import de.kumpelblase2.remoteentities.persistence.ISingleEntitySerializer;
 import de.kumpelblase2.remoteentities.utilities.*;
@@ -29,7 +28,6 @@ import de.kumpelblase2.remoteentities.utilities.*;
 public abstract class RemoteBaseEntity<T extends LivingEntity> implements RemoteEntity
 {
 	private final int m_id;
-	protected Mind m_mind;
 	protected FeatureSet m_features;
 	protected boolean m_isStationary = false;
 	protected final RemoteEntityType m_type;
@@ -47,7 +45,6 @@ public abstract class RemoteBaseEntity<T extends LivingEntity> implements Remote
 	public RemoteBaseEntity(int inID, RemoteEntityType inType, EntityManager inManager)
 	{
 		this.m_id = inID;
-		this.m_mind = new Mind(this);
 		this.m_features = new FeatureSet(this);
 		this.m_type = inType;
 		this.m_manager = inManager;
@@ -68,12 +65,6 @@ public abstract class RemoteBaseEntity<T extends LivingEntity> implements Remote
 	}
 
 	@Override
-	public Mind getMind()
-	{
-		return this.m_mind;
-	}
-
-	@Override
 	public FeatureSet getFeatures()
 	{
 		return this.m_features;
@@ -89,11 +80,6 @@ public abstract class RemoteBaseEntity<T extends LivingEntity> implements Remote
 	public void setStationary(boolean inState, boolean inKeepHeadFixed)
 	{
 		this.m_isStationary = inState;
-		if(!inKeepHeadFixed)
-		{
-			this.getMind().resetFixedYaw();
-			this.getMind().resetFixedPitch();
-		}
 	}
 
 	@Override
@@ -185,9 +171,6 @@ public abstract class RemoteBaseEntity<T extends LivingEntity> implements Remote
 			this.move(newLoc);
 		else
 		{
-			if(this.isStationary())
-				this.getMind().fixYawAt(inYaw);
-
 			this.m_entity.yaw = inYaw;
 			this.m_entity.aO = inYaw;
 		}
@@ -199,9 +182,6 @@ public abstract class RemoteBaseEntity<T extends LivingEntity> implements Remote
 		if(!this.isSpawned())
 			return;
 
-		if(this.isStationary())
-			this.getMind().fixPitchAt(inPitch);
-
 		this.m_entity.pitch = inPitch;
 	}
 
@@ -210,9 +190,6 @@ public abstract class RemoteBaseEntity<T extends LivingEntity> implements Remote
 	{
 		if(!this.isSpawned())
 			return;
-
-		if(this.isStationary())
-			this.getMind().fixHeadYawAt(inHeadYaw);
 
 		this.m_entity.aP = inHeadYaw;
 		this.m_entity.aQ = inHeadYaw;
@@ -337,19 +314,11 @@ public abstract class RemoteBaseEntity<T extends LivingEntity> implements Remote
 		if(event.isCancelled() && inReason != DespawnReason.PLUGIN_DISABLE)
 			return false;
 
-		if(inReason != DespawnReason.CHUNK_UNLOAD && inReason != DespawnReason.NAME_CHANGE)
-		{
-			for(Behavior behaviour : this.getMind().getBehaviours())
-			{
-				behaviour.onRemove();
-			}
+        if (inReason == DespawnReason.CHUNK_UNLOAD || inReason == DespawnReason.NAME_CHANGE) {
+            this.m_unloadedLocation = (this.getBukkitEntity() != null ? this.getBukkitEntity().getLocation() : null);
+        }
 
-			this.getMind().clearBehaviours();
-		}
-		else
-			this.m_unloadedLocation = (this.getBukkitEntity() != null ? this.getBukkitEntity().getLocation() : null);
-
-		if(this.getBukkitEntity() != null)
+        if(this.getBukkitEntity() != null)
 			this.getBukkitEntity().remove();
 		this.m_entity = null;
 		return true;
@@ -648,9 +617,6 @@ public abstract class RemoteBaseEntity<T extends LivingEntity> implements Remote
 
 	boolean onCollide(Entity inEntity)
 	{
-		if(this.getMind() == null)
-			return true;
-
 		if(this.m_lastBouncedId != inEntity.getEntityId() || System.currentTimeMillis() - this.m_lastBouncedTime > 1000)
 		{
 			RemoteEntityTouchEvent event = new RemoteEntityTouchEvent(this, inEntity);
@@ -658,11 +624,6 @@ public abstract class RemoteBaseEntity<T extends LivingEntity> implements Remote
 			if(event.isCancelled())
 				return false;
 
-			if(inEntity instanceof Player && this.getMind().canFeel() && this.getMind().hasBehavior(TouchBehavior.class))
-			{
-				if(inEntity.getLocation().distanceSquared(getBukkitEntity().getLocation()) <= 1)
-					this.getMind().getBehavior(TouchBehavior.class).onTouch((Player)inEntity);
-			}
 		}
 
 		this.m_lastBouncedTime = System.currentTimeMillis();
@@ -672,11 +633,6 @@ public abstract class RemoteBaseEntity<T extends LivingEntity> implements Remote
 
 	void onDeath()
 	{
-		if(this.getMind().hasBehavior(DeathBehavior.class))
-			this.getMind().getBehavior(DeathBehavior.class).onDeath();
-
-		this.getMind().clearMovementDesires();
-		this.getMind().clearTargetingDesires();
 	}
 
 	boolean onInteract(Player inEntity)
@@ -688,19 +644,6 @@ public abstract class RemoteBaseEntity<T extends LivingEntity> implements Remote
 			return false;
 		}
 
-		if(this.getMind() == null)
-			return true;
-
-		if(this.getMind().canFeel())
-		{
-			RemoteEntityInteractEvent event = new RemoteEntityInteractEvent(this, inEntity);
-			Bukkit.getPluginManager().callEvent(event);
-			if(event.isCancelled())
-				return false;
-
-			if(this.getMind().hasBehavior(InteractBehavior.class))
-				this.getMind().getBehavior(InteractBehavior.class).onInteract(inEntity);
-		}
 		return true;
 	}
 

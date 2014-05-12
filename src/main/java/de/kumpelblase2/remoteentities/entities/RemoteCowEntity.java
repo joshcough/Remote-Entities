@@ -6,9 +6,6 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.util.Vector;
 import de.kumpelblase2.remoteentities.api.*;
 import de.kumpelblase2.remoteentities.api.features.InventoryFeature;
-import de.kumpelblase2.remoteentities.api.thinking.DesireItem;
-import de.kumpelblase2.remoteentities.api.thinking.RideBehavior;
-import de.kumpelblase2.remoteentities.api.thinking.goals.*;
 import de.kumpelblase2.remoteentities.nms.PathfinderGoalSelectorHelper;
 
 public class RemoteCowEntity extends EntityCow implements RemoteEntityHandle
@@ -44,20 +41,6 @@ public class RemoteCowEntity extends EntityCow implements RemoteEntityHandle
 	}
 
 	@Override
-	public void setupStandardGoals()
-	{
-		this.getRemoteEntity().getMind().addMovementDesires(getDefaultMovementDesires());
-	}
-
-	@Override
-	public void h()
-	{
-		super.h();
-		if(this.getRemoteEntity() != null)
-			this.getRemoteEntity().getMind().tick();
-	}
-
-	@Override
 	public void g(double x, double y, double z)
 	{
 		if(this.m_remoteEntity == null)
@@ -84,9 +67,6 @@ public class RemoteCowEntity extends EntityCow implements RemoteEntityHandle
 	public void e(float inXMotion, float inZMotion)
 	{
 		float[] motion = new float[] { inXMotion, inZMotion, (float)this.motY };
-		if(this.m_remoteEntity.getMind().hasBehavior(RideBehavior.class))
-			this.m_remoteEntity.getMind().getBehavior(RideBehavior.class).ride(motion);
-
 		this.motY = (double)motion[2];
 		super.e(motion[0], motion[1]);
 	}
@@ -147,30 +127,4 @@ public class RemoteCowEntity extends EntityCow implements RemoteEntityHandle
 		this.makeSound(this.m_remoteEntity.getSound(EntitySound.STEP), 0.15F, 1.0F);
 	}
 
-	public static DesireItem[] getDefaultMovementDesires()
-	{
-		try
-		{
-			return new DesireItem[] {
-					new DesireItem(new DesireSwim(), 0),
-					new DesireItem(new DesirePanic(2.0D), 1),
-					new DesireItem(new DesireBreed(), 2),
-					new DesireItem(new DesireTempt(Item.b(Items.WHEAT), false, 1.25D), 3),
-					new DesireItem(new DesireFollowParent(1.25D), 4),
-					new DesireItem(new DesireWanderAround(), 5),
-					new DesireItem(new DesireLookAtNearest(EntityHuman.class, 6), 6),
-					new DesireItem(new DesireLookRandomly(), 7)
-			};
-		}
-		catch(Exception e)
-		{
-			e.printStackTrace();
-			return new DesireItem[0];
-		}
-	}
-
-	public static DesireItem[] getDefaultTargetingDesires()
-	{
-		return new DesireItem[0];
-	}
 }
