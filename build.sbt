@@ -1,12 +1,12 @@
 import AssemblyKeys._
 
-name := "Remote Entities"
+name := "remote-entities"
 
 organization := "de.kumpelblase2"
 
 scalaVersion := "2.11.0"
 
-version := "1.7.2-R0.2-SNAPSHOT"
+version := "1.7.2-R0.2"
 
 licenses <++= version(v => Seq("MIT" -> url("https://github.com/joshcough/Remote-Entities" + "/blob/%s/LICENSE".format(v))))
 
@@ -36,3 +36,7 @@ artifact in (Compile, assembly) ~= { art =>
 }
 
 addArtifact(artifact in (Compile, assembly), assembly)
+
+seq(bintraySettings:_*)
+
+publishMavenStyle := true
