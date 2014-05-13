@@ -1,8 +1,8 @@
 package de.kumpelblase2.remoteentities.entities;
 
+import com.joshcough.remoteentities.EntityManager;
 import net.minecraft.server.v1_7_R1.EntityLiving;
 import org.bukkit.entity.LivingEntity;
-import de.kumpelblase2.remoteentities.EntityManager;
 import de.kumpelblase2.remoteentities.api.Fightable;
 import de.kumpelblase2.remoteentities.api.RemoteEntityType;
 import de.kumpelblase2.remoteentities.utilities.NMSUtil;

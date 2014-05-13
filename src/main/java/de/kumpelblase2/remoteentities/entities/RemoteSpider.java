@@ -1,7 +1,7 @@
 package de.kumpelblase2.remoteentities.entities;
 
+import com.joshcough.remoteentities.EntityManager;
 import org.bukkit.entity.Spider;
-import de.kumpelblase2.remoteentities.EntityManager;
 import de.kumpelblase2.remoteentities.api.EntitySound;
 import de.kumpelblase2.remoteentities.api.RemoteEntityType;
 

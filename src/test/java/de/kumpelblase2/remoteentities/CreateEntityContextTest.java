@@ -1,5 +1,6 @@
 package de.kumpelblase2.remoteentities;
 
+import com.joshcough.remoteentities.EntityManager;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -19,7 +20,7 @@ import static org.mockito.Mockito.*;
 public class CreateEntityContextTest
 {
 	@Mock
-	EntityManager m_entityManager;
+    EntityManager m_entityManager;
 	@Mock(answer = Answers.RETURNS_DEEP_STUBS)
 	RemoteEntity m_remoteEntity;
 	@Mock(answer = Answers.RETURNS_DEEP_STUBS)

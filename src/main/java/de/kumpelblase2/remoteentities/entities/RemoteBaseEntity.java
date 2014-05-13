@@ -1,6 +1,8 @@
 package de.kumpelblase2.remoteentities.entities;
 
 import java.util.*;
+
+import com.joshcough.remoteentities.EntityManager;
 import net.minecraft.server.v1_7_R1.*;
 import net.minecraft.server.v1_7_R1.World;
 import org.bukkit.*;
@@ -17,7 +19,6 @@ import org.bukkit.inventory.EntityEquipment;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.metadata.FixedMetadataValue;
 import org.bukkit.util.Vector;
-import de.kumpelblase2.remoteentities.EntityManager;
 import de.kumpelblase2.remoteentities.api.*;
 import de.kumpelblase2.remoteentities.api.events.*;
 import de.kumpelblase2.remoteentities.api.features.*;

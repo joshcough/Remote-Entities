@@ -2,8 +2,9 @@ package de.kumpelblase2.remoteentities.entities;
 
 import java.util.HashMap;
 import java.util.Map;
+
+import com.joshcough.remoteentities.EntityManager;
 import org.bukkit.entity.MagmaCube;
-import de.kumpelblase2.remoteentities.EntityManager;
 import de.kumpelblase2.remoteentities.api.EntitySound;
 import de.kumpelblase2.remoteentities.api.RemoteEntityType;
 

@@ -1,6 +1,8 @@
 package de.kumpelblase2.remoteentities;
 
 import java.util.*;
+
+import com.joshcough.remoteentities.EntityManager;
 import org.bukkit.Location;
 import de.kumpelblase2.remoteentities.api.RemoteEntity;
 import de.kumpelblase2.remoteentities.api.RemoteEntityType;
@@ -22,7 +24,7 @@ public class CreateEntityContext
 	private double m_maxHealth = -1;
 	private double m_pathfindingRange = -1;
 
-	CreateEntityContext(EntityManager inManager)
+	public CreateEntityContext(EntityManager inManager)
 	{
 		this.m_features = new ArrayList<Feature>();
 		this.m_manager = inManager;

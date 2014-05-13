@@ -1,6 +1,8 @@
 package de.kumpelblase2.remoteentities;
 
 import java.util.*;
+
+import com.joshcough.remoteentities.EntityManager;
 import org.bukkit.*;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
@@ -10,12 +12,12 @@ import org.bukkit.event.world.ChunkUnloadEvent;
 import de.kumpelblase2.remoteentities.api.*;
 import de.kumpelblase2.remoteentities.utilities.WorldUtilities;
 
-class ChunkEntityLoader implements Listener
+public class ChunkEntityLoader implements Listener
 {
 	private final EntityManager m_manager;
 	private final Set<EntityLoadData> m_toSpawn;
 
-	ChunkEntityLoader(EntityManager inManager)
+	public ChunkEntityLoader(EntityManager inManager)
 	{
 		this.m_manager = inManager;
 		this.m_toSpawn = new HashSet<EntityLoadData>();

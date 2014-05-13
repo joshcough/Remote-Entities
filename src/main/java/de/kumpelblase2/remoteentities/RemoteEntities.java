@@ -3,6 +3,8 @@ package de.kumpelblase2.remoteentities;
 import java.io.*;
 import java.net.URL;
 import java.util.*;
+
+import com.joshcough.remoteentities.EntityManager;
 import javassist.*;
 import org.bukkit.Bukkit;
 import org.bukkit.command.*;

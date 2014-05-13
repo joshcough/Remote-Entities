@@ -1,5 +1,6 @@
 package de.kumpelblase2.remoteentities;
 
+import com.joshcough.remoteentities.EntityManager;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.Plugin;
 import org.junit.Before;
@@ -17,7 +18,7 @@ import static org.mockito.Mockito.*;
 @PrepareForTest(Bukkit.class)
 public class EntityManagerTest
 {
-	EntityManager m_entityManager;
+    EntityManager m_entityManager;
 
 	@Mock
 	Plugin plugin;
@@ -28,7 +29,7 @@ public class EntityManagerTest
 	@Before
 	public void setup()
 	{
-		this.m_entityManager = spy(new EntityManager(false, this.plugin));
+		this.m_entityManager = spy(new EntityManager(this.plugin, false));
 		BukkitTestHelper.setupBukkit();
 	}
 

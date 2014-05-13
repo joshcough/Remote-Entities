@@ -2,7 +2,8 @@ package de.kumpelblase2.remoteentities.entities;
 
 import java.util.HashMap;
 import java.util.Map;
-import de.kumpelblase2.remoteentities.EntityManager;
+
+import com.joshcough.remoteentities.EntityManager;
 import de.kumpelblase2.remoteentities.api.EntitySound;
 import de.kumpelblase2.remoteentities.api.RemoteEntityType;
 

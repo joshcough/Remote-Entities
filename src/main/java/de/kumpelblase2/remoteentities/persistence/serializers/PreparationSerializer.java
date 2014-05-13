@@ -1,5 +1,6 @@
 package de.kumpelblase2.remoteentities.persistence.serializers;
 
+import com.joshcough.remoteentities.EntityManager;
 import org.bukkit.plugin.Plugin;
 import de.kumpelblase2.remoteentities.*;
 import de.kumpelblase2.remoteentities.api.RemoteEntity;

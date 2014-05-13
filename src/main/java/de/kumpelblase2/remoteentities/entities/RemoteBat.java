@@ -1,8 +1,8 @@
 package de.kumpelblase2.remoteentities.entities;
 
+import com.joshcough.remoteentities.EntityManager;
 import net.minecraft.server.v1_7_R1.EntityBat;
 import org.bukkit.entity.Bat;
-import de.kumpelblase2.remoteentities.EntityManager;
 import de.kumpelblase2.remoteentities.api.EntitySound;
 import de.kumpelblase2.remoteentities.api.RemoteEntityType;
 

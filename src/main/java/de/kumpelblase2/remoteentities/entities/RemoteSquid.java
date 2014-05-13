@@ -1,6 +1,6 @@
 package de.kumpelblase2.remoteentities.entities;
 
-import de.kumpelblase2.remoteentities.EntityManager;
+import com.joshcough.remoteentities.EntityManager;
 import de.kumpelblase2.remoteentities.api.RemoteEntityType;
 
 public class RemoteSquid extends RemoteBaseEntity

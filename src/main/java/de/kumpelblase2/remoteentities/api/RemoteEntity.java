@@ -5,7 +5,7 @@ import net.minecraft.server.v1_7_R1.EntityLiving;
 import org.bukkit.Location;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
-import de.kumpelblase2.remoteentities.EntityManager;
+import com.joshcough.remoteentities.EntityManager;
 import de.kumpelblase2.remoteentities.api.features.FeatureSet;
 
 public interface RemoteEntity extends Nameable
