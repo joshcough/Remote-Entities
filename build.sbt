@@ -22,6 +22,17 @@ libraryDependencies ++= Seq(
   "org.powermock"      % "powermock-api-mockito"   % "1.5.4"       % "test"
 )
 
+// make publish local also copy jars to my bukkit server :)
+publishLocal <<= (packagedArtifacts, publishLocal) map { case (r, _) =>
+  r collectFirst { case (Artifact(_, "jar", "jar", Some("assembly"), _, _, name), f) =>
+    val pluginsDir = new File("../MinecraftPlugins/bukkit/plugins/")
+    if(pluginsDir.exists) {
+      println("copying " + f.name + " to bukkit server")
+      IO.copyFile(f, new File(pluginsDir, f.name))
+    }
+  }
+}
+
 assemblySettings
 
 excludedJars in assembly <<= (fullClasspath in assembly) map { cp =>

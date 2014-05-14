@@ -32,7 +32,7 @@ case class EntityManager(m_plugin: Plugin, var m_removeDespawned: Boolean = fals
         val it: Iterator[Map.Entry[Integer, RemoteEntity]] = m_entities.entrySet.iterator
         while (it.hasNext) {
           val entity: RemoteEntity = it.next.getValue
-          if (entity.getHandle == null && m_removeDespawned) it.remove
+          if (entity.getHandle == null) { if(m_removeDespawned) it.remove }
           else {
             entity.getHandle.C
             if (entity.getHandle.dead && entity.despawn(DespawnReason.DEATH)) it.remove
@@ -63,7 +63,7 @@ case class EntityManager(m_plugin: Plugin, var m_removeDespawned: Boolean = fals
   protected def getNextFreeID(inStart: Int): Integer = {
     val ids: Set[Integer] = this.m_entities.keySet
     var i = inStart
-    while (ids.contains(inStart)) { i += 1 }
+    while (ids contains i) { i += 1 }
     i
   }
 
