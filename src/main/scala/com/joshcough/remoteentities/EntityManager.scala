@@ -9,7 +9,7 @@ import org.bukkit.event.world.ChunkLoadEvent
 import org.bukkit.plugin.Plugin
 import de.kumpelblase2.remoteentities.api._
 import de.kumpelblase2.remoteentities.api.events.RemoteEntityCreateEvent
-import de.kumpelblase2.remoteentities.{ChunkEntityLoader, CreateEntityContext, RemoteEntities}
+import de.kumpelblase2.remoteentities.{ChunkEntityLoader, CreateEntityContext}
 import de.kumpelblase2.remoteentities.exceptions.NoNameException
 import de.kumpelblase2.remoteentities.persistence.EntityData
 import de.kumpelblase2.remoteentities.persistence.IEntitySerializer

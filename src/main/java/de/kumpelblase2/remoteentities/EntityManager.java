@@ -27,17 +27,17 @@
 //	protected IEntitySerializer m_serializer;
 //	private boolean m_saveOnDisable = false;
 //
-//	protected EntityManager(Plugin inPlugin, boolean inRemoveDespawned)
+//	protected EntityManager(Plugin inPlugin, boolean removeDespawned)
 //	{
-//		this(inRemoveDespawned, inPlugin);
+//		this(removeDespawned, inPlugin);
 //		this.setup(inPlugin);
 //	}
 //
-//	EntityManager(boolean inRemoveDespawned, Plugin inPlugin)
+//	EntityManager(boolean removeDespawned, Plugin inPlugin)
 //	{
 //		this.m_plugin = inPlugin;
 //		this.m_entities = new ConcurrentHashMap<Integer, RemoteEntity>();
-//		this.m_removeDespawned = inRemoveDespawned;
+//		this.m_removeDespawned = removeDespawned;
 //		this.m_entityChunkLoader = new ChunkEntityLoader(this);
 //	}
 //

@@ -3,6 +3,7 @@ package de.kumpelblase2.remoteentities;
 import java.util.*;
 
 import com.joshcough.remoteentities.EntityManager;
+import com.joshcough.remoteentities.RemoteEntities;
 import org.bukkit.*;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;

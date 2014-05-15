@@ -5,9 +5,10 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.net.SocketAddress;
 import java.util.*;
+
+import com.joshcough.remoteentities.RemoteEntities;
 import net.minecraft.util.io.netty.channel.Channel;
 import org.bukkit.Bukkit;
-import de.kumpelblase2.remoteentities.RemoteEntities;
 import de.kumpelblase2.remoteentities.persistence.ParameterData;
 import de.kumpelblase2.remoteentities.persistence.SerializeAs;
 
@@ -164,7 +165,6 @@ public final class ReflectionUtil
 
 	/**
 	 * Gets the nms class with the given name
-	 *
 	 * @param inName    The internal name of the class
 	 * @return          The class
 	 */
@@ -172,7 +172,7 @@ public final class ReflectionUtil
 	{
 		try
 		{
-			return Class.forName("net.minecraft.server." + RemoteEntities.getMinecraftRevision() + "." + inName);
+			return Class.forName("net.minecraft.server." + RemoteEntities.MINECRAFT_REVISION() + "." + inName);
 		}
 		catch(Exception e)
 		{

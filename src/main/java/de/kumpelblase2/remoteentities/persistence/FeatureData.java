@@ -2,9 +2,10 @@ package de.kumpelblase2.remoteentities.persistence;
 
 import java.lang.reflect.Constructor;
 import java.util.*;
+
+import com.joshcough.remoteentities.RemoteEntities;
 import org.apache.commons.lang3.ClassUtils;
 import org.bukkit.configuration.serialization.ConfigurationSerializable;
-import de.kumpelblase2.remoteentities.RemoteEntities;
 import de.kumpelblase2.remoteentities.api.RemoteEntity;
 import de.kumpelblase2.remoteentities.api.features.Feature;
 
