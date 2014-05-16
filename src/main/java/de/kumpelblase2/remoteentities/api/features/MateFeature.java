@@ -1,5 +1,6 @@
 package de.kumpelblase2.remoteentities.api.features;
 
+import com.joshcough.remoteentities.api.features.Feature;
 import org.bukkit.entity.LivingEntity;
 
 public interface MateFeature extends Feature

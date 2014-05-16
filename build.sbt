@@ -1,12 +1,13 @@
 import AssemblyKeys._
+import com.joshcough.minecraft.Plugin._
 
 name := "remote-entities"
 
-organization := "de.kumpelblase2"
+organization := "com.joshcough"
 
 scalaVersion := "2.11.0"
 
-version := "1.7.2-R0.2-1"
+version := "1.7.2-R0.2_0.3.3"
 
 licenses <++= version(v => Seq("MIT" -> url("https://github.com/joshcough/Remote-Entities" + "/blob/%s/LICENSE".format(v))))
 
@@ -14,6 +15,7 @@ resolvers += ("Bukkit" at "http://repo.bukkit.org/content/repositories/releases"
 
 libraryDependencies ++= Seq(
   "org.bukkit"         % "craftbukkit"             % "1.7.2-R0.2",
+  "com.joshcough"     %% "scala-minecraft-plugin-api" % "0.3.3",
   "org.apache.commons" % "commons-lang3"           % "3.1",
   "javassist"          % "javassist"               % "3.12.1.GA",
   "junit"              % "junit"                   % "4.11"        % "test",
@@ -22,23 +24,13 @@ libraryDependencies ++= Seq(
   "org.powermock"      % "powermock-api-mockito"   % "1.5.4"       % "test"
 )
 
-// make publish local also copy jars to my bukkit server :)
-publishLocal <<= (packagedArtifacts, publishLocal) map { case (r, _) =>
-  r collectFirst { case (Artifact(_, "jar", "jar", Some("assembly"), _, _, name), f) =>
-    val pluginsDir = new File("../MinecraftPlugins/bukkit/plugins/")
-    if(pluginsDir.exists) {
-      println("copying " + f.name + " to bukkit server")
-      IO.copyFile(f, new File(pluginsDir, f.name))
-    }
-  }
-}
-
 assemblySettings
 
 excludedJars in assembly <<= (fullClasspath in assembly) map { cp =>
   cp filter { x =>
     x.data.getName.contains("craftbukkit") ||
-    x.data.getName.contains("scala-library")
+    x.data.getName.contains("scala-library") ||
+    x.data.getName.contains("scala-minecraft")
   }
 }
 
@@ -51,3 +43,7 @@ addArtifact(artifact in (Compile, assembly), assembly)
 seq(bintraySettings:_*)
 
 publishMavenStyle := true
+
+seq(pluginYmlSettings("com.joshcough.remoteentities.RemoteEntities", "JoshCough"):_*)
+
+seq(copyPluginToBukkitSettings(Some("assembly")):_*)

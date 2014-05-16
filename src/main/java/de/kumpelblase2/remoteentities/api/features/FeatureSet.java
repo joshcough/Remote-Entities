@@ -1,6 +1,8 @@
 package de.kumpelblase2.remoteentities.api.features;
 
 import java.util.*;
+
+import com.joshcough.remoteentities.api.features.Feature;
 import de.kumpelblase2.remoteentities.api.RemoteEntity;
 
 public class FeatureSet

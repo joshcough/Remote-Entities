@@ -1,5 +1,6 @@
 package de.kumpelblase2.remoteentities.api.features;
 
+import com.joshcough.remoteentities.api.features.Feature;
 import org.bukkit.entity.Player;
 
 public interface TamingFeature extends Feature

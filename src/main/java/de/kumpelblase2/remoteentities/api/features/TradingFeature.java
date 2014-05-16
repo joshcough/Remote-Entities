@@ -1,6 +1,8 @@
 package de.kumpelblase2.remoteentities.api.features;
 
 import java.util.List;
+
+import com.joshcough.remoteentities.api.features.Feature;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 

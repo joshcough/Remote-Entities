@@ -16,7 +16,6 @@ public class WorldUtilities
 {
 	/**
 	 * Checks if a position is inside a circle
-	 *
 	 * @param m_midXPos	middle x coordinate of circle
 	 * @param m_midZPos	middle y coordinate of circle
 	 * @param inPointX	point x value
@@ -33,7 +32,6 @@ public class WorldUtilities
 
 	/**
 	 * Gets the closest village to an entity
-	 *
 	 * @param inEntity	entity
 	 * @return			village
 	 */
@@ -52,7 +50,6 @@ public class WorldUtilities
 
 	/**
 	 * Gets the NMS entity from a bukkit entity.
-	 *
 	 * @param inEntity  The bukkit entity
 	 * @return          NMS entity
 	 */
@@ -63,7 +60,6 @@ public class WorldUtilities
 
 	/**
 	 * Gets the players which are nearby this entity.
-	 *
 	 * @param inEntity      The entity in which range the players should be
 	 * @param inDistance    The maximum distance to check
 	 * @return              List of found players
@@ -83,7 +79,6 @@ public class WorldUtilities
 
 	/**
 	 * Sends a packet to a player.
-	 *
 	 * @param inPlayer  The player to send the packet to
 	 * @param inPacket  The packet to send
 	 */

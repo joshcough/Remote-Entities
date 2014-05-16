@@ -31,10 +31,10 @@ public class ObjectParser
 	@SuppressWarnings("rawtypes")
 	public Object deserialize(ParameterData inData)
 	{
-		Class typeClass = this.getClass(inData.type);
+		Class typeClass = this.getClass(inData.typ());
 		if(typeClass.isArray())
 		{
-			String valueString = inData.value.toString();
+			String valueString = inData.value().toString();
 			valueString = valueString.substring(1, valueString.length() - 1);
 			String[] values = valueString.split(",");
 			Object[] data = new Object[values.length];
@@ -46,7 +46,7 @@ public class ObjectParser
 		}
 		else
 		{
-			return this.getDeserializedObject(typeClass, inData.value);
+			return this.getDeserializedObject(typeClass, inData.value());
 		}
 	}
 

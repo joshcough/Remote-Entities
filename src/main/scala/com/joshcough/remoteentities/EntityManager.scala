@@ -9,10 +9,9 @@ import org.bukkit.event.world.ChunkLoadEvent
 import org.bukkit.plugin.Plugin
 import de.kumpelblase2.remoteentities.api._
 import de.kumpelblase2.remoteentities.api.events.RemoteEntityCreateEvent
-import de.kumpelblase2.remoteentities.{ChunkEntityLoader, CreateEntityContext}
+import de.kumpelblase2.remoteentities.CreateEntityContext
 import de.kumpelblase2.remoteentities.exceptions.NoNameException
-import de.kumpelblase2.remoteentities.persistence.EntityData
-import de.kumpelblase2.remoteentities.persistence.IEntitySerializer
+import de.kumpelblase2.remoteentities.persistence.{EntityData, IEntitySerializer}
 import de.kumpelblase2.remoteentities.utilities.NMSUtil
 import scala.collection.JavaConversions._
 
@@ -392,7 +391,6 @@ case class EntityManager(m_plugin: Plugin, var m_removeDespawned: Boolean = fals
    * @param spawnedOnly	Whether to ignore despawned entities or not
    * @return		List of entities with the given type
    */
-  def getEntitiesByType(typ: RemoteEntityType, spawnedOnly: Boolean): Iterable[RemoteEntity] = {
+  def getEntitiesByType(typ: RemoteEntityType, spawnedOnly: Boolean): Iterable[RemoteEntity] =
     this.m_entities.values.filter(e => (e.getType eq typ) && (!spawnedOnly || e.isSpawned))
-  }
 }

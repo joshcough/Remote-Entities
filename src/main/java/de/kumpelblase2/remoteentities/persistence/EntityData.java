@@ -4,7 +4,7 @@ import java.util.*;
 import org.bukkit.configuration.serialization.ConfigurationSerializable;
 import de.kumpelblase2.remoteentities.api.RemoteEntity;
 import de.kumpelblase2.remoteentities.api.RemoteEntityType;
-import de.kumpelblase2.remoteentities.api.features.Feature;
+import com.joshcough.remoteentities.api.features.Feature;
 import de.kumpelblase2.remoteentities.entities.RemoteBaseEntity;
 
 public class EntityData implements ConfigurationSerializable
@@ -57,7 +57,7 @@ public class EntityData implements ConfigurationSerializable
 		{
 			Feature f = inEntity.getFeatures().getAllFeatures().get(i);
 			if(!f.getClass().isAnnotationPresent(IgnoreSerialization.class))
-				featureList.add(new FeatureData(f));
+				featureList.add(FeatureData.apply(f));
 		}
 
 		this.features = featureList.toArray(new FeatureData[featureList.size()]);
@@ -84,7 +84,7 @@ public class EntityData implements ConfigurationSerializable
 			this.features = new FeatureData[dataList.size()];
 			for(int i = 0; i < this.features.length; i++)
 			{
-				this.features[i] = new FeatureData(dataList.get(i));
+				this.features[i] = FeatureData.apply(dataList.get(i));
 			}
 		}
 	}

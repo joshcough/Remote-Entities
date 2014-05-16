@@ -1,5 +1,6 @@
 package de.kumpelblase2.remoteentities.api.features;
 
+import com.joshcough.remoteentities.api.features.Feature;
 import de.kumpelblase2.remoteentities.api.RemoteEntity;
 import de.kumpelblase2.remoteentities.persistence.ParameterData;
 import de.kumpelblase2.remoteentities.utilities.ReflectionUtil;

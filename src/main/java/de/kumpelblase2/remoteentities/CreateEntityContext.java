@@ -6,7 +6,7 @@ import com.joshcough.remoteentities.EntityManager;
 import org.bukkit.Location;
 import de.kumpelblase2.remoteentities.api.RemoteEntity;
 import de.kumpelblase2.remoteentities.api.RemoteEntityType;
-import de.kumpelblase2.remoteentities.api.features.Feature;
+import com.joshcough.remoteentities.api.features.Feature;
 import de.kumpelblase2.remoteentities.exceptions.NoNameException;
 import de.kumpelblase2.remoteentities.exceptions.NoTypeException;
 
