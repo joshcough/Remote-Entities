@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/joshcough/Remote-Entities.png?branch=master)](https://travis-ci.org/joshcough/Remote-Entities)
+
 Remote-Entities
 ===============
 
