@@ -4,8 +4,8 @@ import org.bukkit._
 import org.bukkit.entity.LivingEntity
 import org.bukkit.event._
 import org.bukkit.event.world.{ ChunkLoadEvent, ChunkUnloadEvent }
-import de.kumpelblase2.remoteentities.api.{ RemoteEntity, DespawnReason }
-import de.kumpelblase2.remoteentities.utilities.WorldUtilities
+import com.joshcough.remoteentities.api.{ RemoteEntity, DespawnReason }
+import com.joshcough.remoteentities.utilities.WorldUtilities
 import scala.collection.JavaConversions._
 import scala.collection.mutable
 

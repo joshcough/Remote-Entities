@@ -6,12 +6,12 @@ import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
 import org.bukkit.event.server.PluginDisableEvent
 import org.bukkit.plugin.Plugin
-import de.kumpelblase2.remoteentities.exceptions.PluginNotEnabledException
-import de.kumpelblase2.remoteentities.api.DespawnReason
-import de.kumpelblase2.remoteentities.api.RemoteEntity
-import de.kumpelblase2.remoteentities.api.RemoteEntityType
+import com.joshcough.remoteentities.exceptions.PluginNotEnabledException
+import com.joshcough.remoteentities.api.DespawnReason
+import com.joshcough.remoteentities.api.RemoteEntity
+import com.joshcough.remoteentities.api.RemoteEntityType
 import scala.collection.JavaConversions._
-import de.kumpelblase2.remoteentities.utilities.ReflectionUtil
+import com.joshcough.remoteentities.utilities.ReflectionUtil
 import com.joshcough.minecraft.ScalaPlugin
 
 object RemoteEntities {

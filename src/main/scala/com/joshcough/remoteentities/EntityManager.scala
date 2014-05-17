@@ -7,12 +7,11 @@ import org.bukkit.{Bukkit, Location}
 import org.bukkit.entity.{HumanEntity, LivingEntity}
 import org.bukkit.event.world.ChunkLoadEvent
 import org.bukkit.plugin.Plugin
-import de.kumpelblase2.remoteentities.api._
-import de.kumpelblase2.remoteentities.api.events.RemoteEntityCreateEvent
-import de.kumpelblase2.remoteentities.CreateEntityContext
-import de.kumpelblase2.remoteentities.exceptions.NoNameException
-import de.kumpelblase2.remoteentities.persistence.{EntityData, IEntitySerializer}
-import de.kumpelblase2.remoteentities.utilities.NMSUtil
+import com.joshcough.remoteentities.api._
+import com.joshcough.remoteentities.api.events.RemoteEntityCreateEvent
+import com.joshcough.remoteentities.exceptions.NoNameException
+import com.joshcough.remoteentities.persistence.{EntityData, IEntitySerializer}
+import com.joshcough.remoteentities.utilities.NMSUtil
 import scala.collection.JavaConversions._
 
 case class EntityManager(m_plugin: Plugin, var m_removeDespawned: Boolean = false) {

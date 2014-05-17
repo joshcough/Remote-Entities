@@ -1,12 +1,12 @@
-package de.kumpelblase2.remoteentities.examples;
+package com.joshcough.remoteentities.examples;
 
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
-import de.kumpelblase2.remoteentities.EntityManager;
-import de.kumpelblase2.remoteentities.RemoteEntities;
-import de.kumpelblase2.remoteentities.api.RemoteEntity;
-import de.kumpelblase2.remoteentities.api.RemoteEntityType;
-import de.kumpelblase2.remoteentities.persistence.serializers.YMLSerializer;
+import com.joshcough.remoteentities.EntityManager;
+import com.joshcough.remoteentities.RemoteEntities;
+import com.joshcough.remoteentities.api.RemoteEntity;
+import com.joshcough.remoteentities.api.RemoteEntityType;
+import com.joshcough.remoteentities.persistence.serializers.YMLSerializer;
 
 public class ExampleMain extends JavaPlugin
 {

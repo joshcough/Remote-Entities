@@ -1,6 +1,6 @@
 package com.joshcough.remoteentities.api.features
 
-import de.kumpelblase2.remoteentities.api.RemoteEntity
+import com.joshcough.remoteentities.api.RemoteEntity
 import com.joshcough.remoteentities.persistence.SerializableData
 
 trait Feature extends SerializableData {

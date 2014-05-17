@@ -1,14 +1,14 @@
-package de.kumpelblase2.remoteentities.examples;
+package com.joshcough.remoteentities.examples;
 
 import org.bukkit.Bukkit;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.plugin.java.JavaPlugin;
-import de.kumpelblase2.remoteentities.CreateEntityContext;
-import de.kumpelblase2.remoteentities.EntityManager;
-import de.kumpelblase2.remoteentities.RemoteEntities;
-import de.kumpelblase2.remoteentities.api.RemoteEntityType;
+import com.joshcough.remoteentities.CreateEntityContext;
+import com.joshcough.remoteentities.EntityManager;
+import com.joshcough.remoteentities.RemoteEntities;
+import com.joshcough.remoteentities.api.RemoteEntityType;
 
 public class ExampleMain extends JavaPlugin implements Listener
 {
