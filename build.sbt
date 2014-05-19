@@ -21,7 +21,8 @@ libraryDependencies ++= Seq(
   "junit"              % "junit"                   % "4.11"        % "test",
   "org.mockito"        % "mockito-all"             % "1.9.5"       % "test",
   "org.powermock"      % "powermock-module-junit4" % "1.5.4"       % "test",
-  "org.powermock"      % "powermock-api-mockito"   % "1.5.4"       % "test"
+  "org.powermock"      % "powermock-api-mockito"   % "1.5.4"       % "test",
+  "com.novocode"       % "junit-interface"         % "0.9"         % "test"
 )
 
 assemblySettings

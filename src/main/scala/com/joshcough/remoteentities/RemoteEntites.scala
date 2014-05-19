@@ -107,7 +107,6 @@ class RemoteEntities extends ScalaPlugin {
 
   override def onEnable {
     s_instance = this
-    RemoteEntityType.update
     this.getServer.getPluginManager.registerEvents(new DisableListener, this)
   }
 

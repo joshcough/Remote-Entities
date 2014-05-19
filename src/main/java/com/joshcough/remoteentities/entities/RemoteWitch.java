@@ -9,7 +9,7 @@ public class RemoteWitch extends RemoteAttackingBaseEntity<Witch>
 {
 	public RemoteWitch(int inID, EntityManager inManager)
 	{
-		super(inID, RemoteEntityType.Witch, inManager);
+		super(inID, RemoteEntityType.Witch(), inManager);
 	}
 
 	@Override

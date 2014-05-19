@@ -1,6 +1,5 @@
 package com.joshcough.remoteentities;
 
-import com.joshcough.remoteentities.EntityManager;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -44,13 +43,13 @@ public class CreateEntityContextTest
 	@Test(expected = NoNameException.class)
 	public void testFailNoName()
 	{
-		new CreateEntityContext(this.m_entityManager).withType(RemoteEntityType.Human).create();
+		new CreateEntityContext(this.m_entityManager).withType(RemoteEntityType.Human()).create();
 	}
 
 	@Test
 	public void testCreateNotNamed()
 	{
-		RemoteEntity created = new CreateEntityContext(this.m_entityManager).withType(RemoteEntityType.Pig).withFeatures(mock(InventoryFeature.class)).create();
+		RemoteEntity created = new CreateEntityContext(this.m_entityManager).withType(RemoteEntityType.Pig()).withFeatures(mock(InventoryFeature.class)).create();
 		assertEquals("Created entity and saved entity should be equal", this.m_remoteEntity, created);
 		verify(created.getFeatures(), times(1)).addFeature(any(InventoryFeature.class));
 		verify(created, never()).setName(anyString());
@@ -62,7 +61,7 @@ public class CreateEntityContextTest
 	@Test
 	public void testCreateNamed()
 	{
-		RemoteEntity created = new CreateEntityContext(this.m_entityManager).withType(RemoteEntityType.Human).withName("Test").create();
+		RemoteEntity created = new CreateEntityContext(this.m_entityManager).withType(RemoteEntityType.Human()).withName("Test").create();
 		assertEquals("Created entity and saved entity should be equal", this.m_remotePlayer, created);
 		verify(created, never()).setSpeed(anyDouble());
 		verify(created, times(1)).setStationary(eq(false));

@@ -14,7 +14,7 @@ public class RemoteZombie extends RemoteAttackingBaseEntity<Zombie>
 
 	public RemoteZombie(int inID, RemoteZombieEntity inEntity, EntityManager inManager)
 	{
-		super(inID, RemoteEntityType.Zombie, inManager);
+		super(inID, RemoteEntityType.Zombie(), inManager);
 		this.m_entity = inEntity;
 	}
 

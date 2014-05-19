@@ -23,7 +23,7 @@ public class RemoteEnderDragon extends RemoteAttackingBaseEntity<EnderDragon>
 
 	public RemoteEnderDragon(int inID, RemoteEnderDragonEntity inEntity, EntityManager inManager)
 	{
-		super(inID, RemoteEntityType.EnderDragon, inManager);
+		super(inID, RemoteEntityType.EnderDragon(), inManager);
 		this.m_entity = inEntity;
 
 		Bukkit.getPluginManager().registerEvents(new Listener()

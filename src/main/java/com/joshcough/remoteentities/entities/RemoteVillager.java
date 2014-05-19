@@ -16,7 +16,7 @@ public class RemoteVillager extends RemoteBaseEntity
 
 	public RemoteVillager(int inID, RemoteVillagerEntity inEntity, EntityManager inManager)
 	{
-		super(inID, RemoteEntityType.Villager, inManager);
+		super(inID, RemoteEntityType.Villager(), inManager);
 		this.m_entity = inEntity;
 	}
 

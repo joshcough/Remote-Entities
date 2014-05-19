@@ -19,7 +19,7 @@ public class RemoteEnderman extends RemoteAttackingBaseEntity<Enderman>
 
 	public RemoteEnderman(int inID, RemoteEndermanEntity inEntity, EntityManager inManager)
 	{
-		super(inID, RemoteEntityType.Enderman, inManager);
+		super(inID, RemoteEntityType.Enderman(), inManager);
 		this.m_entity = inEntity;
 	}
 

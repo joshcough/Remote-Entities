@@ -67,7 +67,7 @@ public class EntityData implements ConfigurationSerializable
 	public EntityData(Map<String, Object> inData)
 	{
 		this.id = (Integer)inData.get("id");
-		this.type = RemoteEntityType.valueOf((String)inData.get("type"));
+		this.type = RemoteEntityType.findByName((String)inData.get("type")).get(); // TODO: evil get
 		this.name = (String)inData.get("name");
 		this.location = new LocationData((Map<String, Object>)inData.get("location"));
 		this.stationary = (Boolean)inData.get("stationary");

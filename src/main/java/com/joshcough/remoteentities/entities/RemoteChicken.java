@@ -13,7 +13,7 @@ public class RemoteChicken extends RemoteBaseEntity
 
 	public RemoteChicken(int inID, RemoteChickenEntity inEntity, EntityManager inManager)
 	{
-		super(inID, RemoteEntityType.Chicken, inManager);
+		super(inID, RemoteEntityType.Chicken(), inManager);
 		this.m_entity = inEntity;
 	}
 

@@ -9,7 +9,7 @@ public class RemoteHorse extends RemoteBaseEntity<Horse>
 {
 	public RemoteHorse(int inID, EntityManager inManager)
 	{
-		super(inID, RemoteEntityType.Horse, inManager);
+		super(inID, RemoteEntityType.Horse(), inManager);
 	}
 
 	public RemoteHorse(int inID, RemoteHorseEntity inEntity, EntityManager inManager)

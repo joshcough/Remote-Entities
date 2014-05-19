@@ -9,7 +9,7 @@ public class RemoteWither extends RemoteAttackingBaseEntity<Wither>
 {
 	public RemoteWither(int inID, EntityManager inManager)
 	{
-		super(inID, RemoteEntityType.Wither, inManager);
+		super(inID, RemoteEntityType.Wither(), inManager);
 	}
 
 	@Override

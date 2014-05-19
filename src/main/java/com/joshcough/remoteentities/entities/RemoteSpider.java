@@ -14,7 +14,7 @@ public class  RemoteSpider extends RemoteAttackingBaseEntity<Spider>
 
 	public RemoteSpider(int inID, RemoteSpiderEntity inEntity, EntityManager inManager)
 	{
-		super(inID, RemoteEntityType.Spider, inManager);
+		super(inID, RemoteEntityType.Spider(), inManager);
 		this.m_entity = inEntity;
 	}
 

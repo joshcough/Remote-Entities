@@ -15,7 +15,7 @@ public class RemoteSkeleton extends RemoteAttackingBaseEntity<Skeleton>
 
 	public RemoteSkeleton(int inID, EntityLiving inEntity, EntityManager inManager)
 	{
-		super(inID, RemoteEntityType.Skeleton, inManager);
+		super(inID, RemoteEntityType.Skeleton(), inManager);
 		this.m_entity = inEntity;
 	}
 

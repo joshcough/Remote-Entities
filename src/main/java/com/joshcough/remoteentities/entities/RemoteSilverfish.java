@@ -14,7 +14,7 @@ public class RemoteSilverfish extends RemoteAttackingBaseEntity<Silverfish>
 
 	public RemoteSilverfish(int inID, RemoteSilverfishEntity inEntity, EntityManager inManager)
 	{
-		super(inID, RemoteEntityType.Silverfish, inManager);
+		super(inID, RemoteEntityType.Silverfish(), inManager);
 		this.m_entity = inEntity;
 	}
 

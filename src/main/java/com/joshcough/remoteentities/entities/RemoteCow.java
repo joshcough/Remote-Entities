@@ -13,7 +13,7 @@ public class RemoteCow extends RemoteBaseEntity
 
 	public RemoteCow(int inID, RemoteCowEntity inEntity, EntityManager inManager)
 	{
-		super(inID, RemoteEntityType.Cow, inManager);
+		super(inID, RemoteEntityType.Cow(), inManager);
 		this.m_entity = inEntity;
 	}
 

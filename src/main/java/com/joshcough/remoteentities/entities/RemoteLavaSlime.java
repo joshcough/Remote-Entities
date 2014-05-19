@@ -17,7 +17,7 @@ public class RemoteLavaSlime extends RemoteAttackingBaseEntity<MagmaCube>
 
 	public RemoteLavaSlime(int inID, RemoteLavaSlimeEntity inEntity, EntityManager inManager)
 	{
-		super(inID, RemoteEntityType.LavaSlime, inManager);
+		super(inID, RemoteEntityType.LavaSlime(), inManager);
 		this.m_entity = inEntity;
 	}
 

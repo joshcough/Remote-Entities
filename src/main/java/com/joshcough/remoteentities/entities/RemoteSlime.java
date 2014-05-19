@@ -17,7 +17,7 @@ public class RemoteSlime extends RemoteAttackingBaseEntity<Slime>
 
 	public RemoteSlime(int inID, RemoteSlimeEntity inEntity, EntityManager inManager)
 	{
-		super(inID, RemoteEntityType.Slime, inManager);
+		super(inID, RemoteEntityType.Slime(), inManager);
 		this.m_entity = inEntity;
 	}
 

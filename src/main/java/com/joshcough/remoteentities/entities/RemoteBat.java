@@ -10,7 +10,7 @@ public class RemoteBat extends RemoteAttackingBaseEntity<Bat>
 {
 	public RemoteBat(int inID, EntityManager inManager)
 	{
-		super(inID, RemoteEntityType.Bat, inManager);
+		super(inID, RemoteEntityType.Bat(), inManager);
 	}
 
 	public RemoteBat(int inID, RemoteBatEntity inEntity, EntityManager inManager)

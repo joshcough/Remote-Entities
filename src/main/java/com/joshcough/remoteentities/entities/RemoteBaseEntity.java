@@ -250,9 +250,9 @@ public abstract class RemoteBaseEntity<T extends LivingEntity> implements Remote
 		try
 		{
 			EntityTypesEntry entry = EntityTypesEntry.fromEntity(this.getNativeEntityName());
-			ReflectionUtil.registerEntityType(this.getType().getEntityClass(), this.getNativeEntityName(), entry.getID());
+			ReflectionUtil.registerEntityType(this.getType().entityClass(), this.getNativeEntityName(), entry.getID());
 			WorldServer worldServer = ((CraftWorld)inLocation.getWorld()).getHandle();
-			this.m_entity = this.m_type.getEntityClass().getConstructor(World.class, RemoteEntity.class).newInstance(worldServer, this);
+			this.m_entity = this.m_type.entityClass().getConstructor(World.class, RemoteEntity.class).newInstance(worldServer, this);
 			this.m_entity.setPositionRotation(inLocation.getX(), inLocation.getY(), inLocation.getZ(), inLocation.getYaw(), inLocation.getPitch());
 			worldServer.addEntity(this.m_entity, SpawnReason.CUSTOM);
 			entry.restore();

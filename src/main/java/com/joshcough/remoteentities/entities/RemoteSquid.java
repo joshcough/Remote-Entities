@@ -12,7 +12,7 @@ public class RemoteSquid extends RemoteBaseEntity
 
 	public RemoteSquid(int inID, RemoteSquidEntity inEntity, EntityManager inManager)
 	{
-		super(inID, RemoteEntityType.Squid, inManager);
+		super(inID, RemoteEntityType.Squid(), inManager);
 		this.m_entity = inEntity;
 	}
 

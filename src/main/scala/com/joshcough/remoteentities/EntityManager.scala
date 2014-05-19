@@ -95,7 +95,7 @@ case class EntityManager(m_plugin: Plugin, var m_removeDespawned: Boolean = fals
   private[remoteentities] def createEntity(inType: RemoteEntityType, inID: Int): RemoteEntity = {
     try {
       val constructor: Constructor[_ <: RemoteEntity] =
-        inType.getRemoteClass.getConstructor(classOf[Int], classOf[EntityManager])
+        inType.remoteClass.getConstructor(classOf[Int], classOf[EntityManager])
       val entity: RemoteEntity = constructor.newInstance(inID.asInstanceOf[AnyRef], this)
       val event: RemoteEntityCreateEvent = new RemoteEntityCreateEvent(entity)
       Bukkit.getPluginManager.callEvent(event)
@@ -145,7 +145,7 @@ case class EntityManager(m_plugin: Plugin, var m_removeDespawned: Boolean = fals
   private[remoteentities] def createNamedEntity(inType: RemoteEntityType, inID: Int, inName: String): RemoteEntity = {
     try {
       val constructor: Constructor[_ <: RemoteEntity] =
-        inType.getRemoteClass.getConstructor(classOf[Int], classOf[String], classOf[EntityManager])
+        inType.remoteClass.getConstructor(classOf[Int], classOf[String], classOf[EntityManager])
       val entity: RemoteEntity = constructor.newInstance(inID.asInstanceOf[AnyRef], inName, this)
       val event: RemoteEntityCreateEvent = new RemoteEntityCreateEvent(entity)
       Bukkit.getPluginManager.callEvent(event)
@@ -246,7 +246,8 @@ case class EntityManager(m_plugin: Plugin, var m_removeDespawned: Boolean = fals
    * @param inEntity	entity to replace
    * @return			instance of the RemoteEntity
    */
-  def createRemoteEntityFromExisting(inEntity: LivingEntity): RemoteEntity = this.createRemoteEntityFromExisting(inEntity, true)
+  def createRemoteEntityFromExisting(inEntity: LivingEntity): Option[RemoteEntity] =
+    this.createRemoteEntityFromExisting(inEntity, true)
 
   /**
    * Creates a RemoteEntity from an existing minecraft entity. The old entity will only get removed when inDeleteOld is true.
@@ -254,20 +255,16 @@ case class EntityManager(m_plugin: Plugin, var m_removeDespawned: Boolean = fals
    * @param inDeleteOld	should delete old one
    * @return				created entity
    */
-  def createRemoteEntityFromExisting(inEntity: LivingEntity, inDeleteOld: Boolean): RemoteEntity = {
-    val typ: RemoteEntityType = RemoteEntityType.getByEntityClass(NMSUtil.getNMSClassFromEntity(inEntity))
-    if (typ == null) return null
-    val originalSpot: Location = inEntity.getLocation
-    if (inDeleteOld) inEntity.remove
-    try inEntity match {
-      case entity: HumanEntity => this.createNamedEntity(typ, originalSpot, entity.getName, true)
-      case _ => this.createEntity(typ, originalSpot, true)
+  def createRemoteEntityFromExisting(inEntity: LivingEntity, inDeleteOld: Boolean): Option[RemoteEntity] =
+    try RemoteEntityType.findByEntityClass(NMSUtil.getNMSClassFromEntity(inEntity)).map { typ =>
+      val originalSpot: Location = inEntity.getLocation
+      if (inDeleteOld) inEntity.remove
+      inEntity match {
+        case entity: HumanEntity => this.createNamedEntity(typ, originalSpot, entity.getName, true)
+        case _ => this.createEntity(typ, originalSpot, true)
+      }
     }
-    catch { case e: Exception =>
-      e.printStackTrace
-      return null
-    }
-  }
+    catch { case e: Exception => e.printStackTrace; None }
 
   /**
    * Despawns all entities from this manager

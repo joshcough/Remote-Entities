@@ -27,7 +27,7 @@ public class RemotePlayer extends RemoteAttackingBaseEntity<Player>
 
 	public RemotePlayer(int inID, String inName, RemotePlayerEntity inEntity, EntityManager inManager)
 	{
-		super(inID, RemoteEntityType.Human, inManager);
+		super(inID, RemoteEntityType.Human(), inManager);
 		this.m_name = inName;
 		this.m_entity = inEntity;
 	}

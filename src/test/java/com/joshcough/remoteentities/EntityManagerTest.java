@@ -1,6 +1,5 @@
 package com.joshcough.remoteentities;
 
-import com.joshcough.remoteentities.EntityManager;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.Plugin;
 import org.junit.Before;
@@ -45,7 +44,7 @@ public class EntityManagerTest
 	@Test
 	public void testCreateEntity()
 	{
-		this.m_entityManager.createEntity(RemoteEntityType.Pig, 0);
+		this.m_entityManager.createEntity(RemoteEntityType.Pig(), 0);
 		verify(BukkitTestHelper.managerMock).callEvent(any(RemoteEntityCreateEvent.class));
 	}
 

@@ -14,7 +14,7 @@ public class RemoteSnowman extends RemoteAttackingBaseEntity<Snowman>
 
 	public RemoteSnowman(int inID, RemoteSnowmanEntity inEntity, EntityManager inManager)
 	{
-		super(inID, RemoteEntityType.Snowman, inManager);
+		super(inID, RemoteEntityType.Snowman(), inManager);
 		this.m_entity = inEntity;
 	}
 

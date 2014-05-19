@@ -14,7 +14,7 @@ public class RemoteCreeper extends RemoteAttackingBaseEntity<Creeper>
 
 	public RemoteCreeper(int inID, RemoteCreeperEntity inEntity, EntityManager inManager)
 	{
-		super(inID, RemoteEntityType.Creeper, inManager);
+		super(inID, RemoteEntityType.Creeper(), inManager);
 		this.m_entity = inEntity;
 	}
 

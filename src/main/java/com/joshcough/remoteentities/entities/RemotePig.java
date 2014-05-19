@@ -13,7 +13,7 @@ public class RemotePig extends RemoteBaseEntity
 
 	public RemotePig(int inID, RemotePigEntity inEntity, EntityManager inManager)
 	{
-		super(inID, RemoteEntityType.Pig, inManager);
+		super(inID, RemoteEntityType.Pig(), inManager);
 		this.m_entity = inEntity;
 	}
 

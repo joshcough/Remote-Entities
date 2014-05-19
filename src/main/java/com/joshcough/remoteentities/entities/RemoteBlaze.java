@@ -14,7 +14,7 @@ public class RemoteBlaze extends RemoteAttackingBaseEntity<Blaze>
 
 	public RemoteBlaze(int inID, RemoteBlazeEntity inEntity, EntityManager inManager)
 	{
-		super(inID, RemoteEntityType.Blaze, inManager);
+		super(inID, RemoteEntityType.Blaze(), inManager);
 		this.m_entity = inEntity;
 	}
 

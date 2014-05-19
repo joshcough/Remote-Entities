@@ -13,7 +13,7 @@ public class RemoteSheep extends RemoteBaseEntity
 
 	public RemoteSheep(int inID, RemoteSheepEntity inEntity, EntityManager inManager)
 	{
-		super(inID, RemoteEntityType.Sheep, inManager);
+		super(inID, RemoteEntityType.Sheep(), inManager);
 		this.m_entity = inEntity;
 	}
 
