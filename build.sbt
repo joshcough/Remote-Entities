@@ -7,7 +7,7 @@ organization := "com.joshcough"
 
 scalaVersion := "2.11.0"
 
-version := "1.7.2-R0.2_0.3.3"
+version := "1.7.2-R0.2_0.3.4"
 
 licenses <++= version(v => Seq("MIT" -> url("https://github.com/joshcough/Remote-Entities" + "/blob/%s/LICENSE".format(v))))
 

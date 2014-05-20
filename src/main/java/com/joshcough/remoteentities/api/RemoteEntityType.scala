@@ -5,11 +5,14 @@ import com.joshcough.remoteentities.entities._
 
 case class RemoteEntityType(remoteClass: Class[_ <: RemoteEntity], entityClass: Class[_ <: EntityLiving]){
   val name = remoteClass.getSimpleName.substring(6) // drop "Remote" (eg. RemoteHuman -> Human)
-  val isNamed = name == "Human" // only Humans are named, apparently.
+  val isNamed = name == "Player" // only Humans are named, apparently.
   override def toString: String = this.name
 }
 
 object RemoteEntityType {
+  private var byName: Map[String, RemoteEntityType] = Map()
+  private var byRemoteClass: Map[Class[_ <: RemoteEntity], RemoteEntityType] = Map()
+
   val Human       = create(classOf[RemotePlayer],      classOf[RemotePlayerEntity])
   val Zombie      = create(classOf[RemoteZombie],      classOf[RemoteZombieEntity])
   val Spider      = create(classOf[RemoteSpider],      classOf[RemoteSpiderEntity])
@@ -39,9 +42,6 @@ object RemoteEntityType {
   val Wither      = create(classOf[RemoteWither],      classOf[RemoteWitherEntity])
   val Bat         = create(classOf[RemoteBat],         classOf[RemoteBatEntity])
   val Horse       = create(classOf[RemoteHorse],       classOf[RemoteHorseEntity])
-
-  private var byName: Map[String, RemoteEntityType] = Map()
-  private var byRemoteClass: Map[Class[_ <: RemoteEntity], RemoteEntityType] = Map()
 
   private def create(remoteClass: Class[_ <: RemoteEntity], entityClass: Class[_ <: EntityLiving]): RemoteEntityType = {
     val t = RemoteEntityType(remoteClass, entityClass)

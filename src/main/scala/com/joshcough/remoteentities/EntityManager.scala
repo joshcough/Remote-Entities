@@ -103,10 +103,7 @@ case class EntityManager(m_plugin: Plugin, var m_removeDespawned: Boolean = fals
       this.m_entities.put(inID, entity)
       entity
     }
-    catch { case e: Exception =>
-      e.printStackTrace
-      null
-    }
+    catch { case e: Exception => e.printStackTrace; null }
   }
 
   /**
